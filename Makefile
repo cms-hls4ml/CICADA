@@ -1,4 +1,7 @@
-CXXFLAGS = -O3 -fPIC -std=c++17
+export CXXFLAGS := -O3 -fPIC -std=c++17
+EMULATOR_EXTRAS := ../../hls4mlEmulatorExtras
+AP_TYPES := $(EMULATOR_EXTRAS)/ap_types
+export INCLUDES := -I$(EMULATOR_EXTRAS) -I$(AP_TYPES)
 
 .PHONY: CICADA
 
