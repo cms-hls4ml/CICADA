@@ -1,7 +1,7 @@
 .PHONY: clean
 
-CICADAModel_v2.so: myproject.o caloADModel_v2.o
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -shared $^ -o $@
+CICADAModel_v2.so: myproject.o caloADModel_v2.o $(EMULATOR_EXTRA_LIBRARY)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $(EMULATOR_EXTRA_LIBRARY) -shared $^ -o $@
 	rm $^
 
 %.o: %.cpp

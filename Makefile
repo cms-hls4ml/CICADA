@@ -4,6 +4,7 @@ export CXXFLAGS := -O3 -fPIC -std=$(CPP_STANDARD)
 EMULATOR_EXTRAS := ../../hls4mlEmulatorExtras
 AP_TYPES := $(EMULATOR_EXTRAS)/ap_types
 export INCLUDES := -I$(EMULATOR_EXTRAS) -I$(AP_TYPES)
+export EMULATOR_EXTRA_LIBRARY := $(EMULATOR_EXTRAS)/emulator_interface.so
 
 .PHONY: CICADA clean
 
