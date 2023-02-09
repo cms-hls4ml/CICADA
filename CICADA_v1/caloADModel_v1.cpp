@@ -3,7 +3,7 @@
 #include <any>
 #include "ap_fixed.h"
 
-class caloADModel : public HLS4MLModel{
+class caloADModel_v1 : public hls4mlEmulator::Model{
     private:
         input_t _input[N_INPUT_1_1];
         result_t _result[N_LAYER_6];
@@ -29,12 +29,12 @@ class caloADModel : public HLS4MLModel{
 
 };
 
-extern "C" HLS4MLModel* create_model()
+extern "C" hls4mlEmulator::Model* create_model()
 {
-    return new caloADModel;
+    return new caloADModel_v1;
 }
 
-extern "C" void destroy_model(HLS4MLModel* m)
+extern "C" void destroy_model(hls4mlEmulator::Model* m)
 {
     delete m;
 }
