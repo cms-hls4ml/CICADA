@@ -1,21 +1,33 @@
 CPP_STANDARD := c++17
-export CXXFLAGS := -O3 -fPIC -std=$(CPP_STANDARD)
+CXXFLAGS := -O3 -fPIC -std=$(CPP_STANDARD)
 
+ifeq ($(strip $(PREFIX)),)
+PREFIX:=.
+endif
+
+ifeq ($(strip $(EMULATOR_EXTRAS)),)
 EMULATOR_EXTRAS := ../../hls4mlEmulatorExtras
-AP_TYPES := $(EMULATOR_EXTRAS)/ap_types
-export INCLUDES := -I$(EMULATOR_EXTRAS) -I$(AP_TYPES)
-export EMULATOR_EXTRA_LIBRARY := $(EMULATOR_EXTRAS)/emulator_interface.so
+endif
 
-.PHONY: CICADA clean
+AP_TYPES := $(EMULATOR_EXTRAS)/include/ap_types
+INCLUDES := -I$(EMULATOR_EXTRAS)/include -I$(AP_TYPES)
+LD_FLAGS := -L$(EMULATOR_EXTRAS)/lib64 -lemulator_interface
+ALL_VERSIONS:=CICADA_v1/CICADAModel_v1.so CICADA_v2/CICADAModel_v2.so
 
-CICADA: CICADA_v1/CICADAModel_v1.so CICADA_v2/CICADAModel_v2.so
-	mv $^ ./
+.DEFAULT_GOAL := all
+.PHONY: all clean install
 
-CICADA_v1/CICADAModel_v1.so: 
-	cd CICADA_v1 && $(MAKE)
+all: $(ALL_VERSIONS)
+	@cp $(ALL_VERSIONS) ./
+	@echo All OK
 
-CICADA_v2/CICADAModel_v2.so:
-	 cd CICADA_v2 && $(MAKE)
+install: all
+	@rm -rf $(PREFIX)/lib64
+	@mkdir -p $(PREFIX)/lib64
+	cp CICADAModel_*.so $(PREFIX)/lib64
+
+%.so:
+	$(MAKE) -C $(@D) INCLUDES="$(INCLUDES)" LD_FLAGS="$(LD_FLAGS)" CXXFLAGS="$(CXXFLAGS)"
 
 clean:
 	rm CICADAModel_*.so
