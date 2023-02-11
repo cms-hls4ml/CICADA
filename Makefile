@@ -1,14 +1,7 @@
 CPP_STANDARD := c++17
 CXXFLAGS := -O3 -fPIC -std=$(CPP_STANDARD)
-
-ifeq ($(strip $(PREFIX)),)
 PREFIX:=.
-endif
-
-ifeq ($(strip $(EMULATOR_EXTRAS)),)
 EMULATOR_EXTRAS := ../../hls4mlEmulatorExtras
-endif
-
 AP_TYPES := $(EMULATOR_EXTRAS)/include/ap_types
 HLS_ROOT := ../../hls
 HLS4ML_INCLUDE := $(EMULATOR_EXTRAS)/include/hls4ml
