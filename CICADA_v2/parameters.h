@@ -9,8 +9,6 @@
 //hls-fpga-machine-learning insert includes
 #include "nnet_utils/nnet_activation.h"
 #include "nnet_utils/nnet_activation_stream.h"
-#include "nnet_utils/nnet_batchnorm.h"
-#include "nnet_utils/nnet_batchnorm_stream.h"
 #include "nnet_utils/nnet_conv2d.h"
 #include "nnet_utils/nnet_conv2d_stream.h"
 #include "nnet_utils/nnet_dense.h"
@@ -20,16 +18,10 @@
 //hls-fpga-machine-learning insert weights
 #include "weights/w3.h"
 #include "weights/b3.h"
-#include "weights/s12.h"
-#include "weights/b12.h"
 #include "weights/w7.h"
 #include "weights/b7.h"
-#include "weights/s13.h"
-#include "weights/b13.h"
 #include "weights/w10.h"
 #include "weights/b10.h"
-#include "weights/s14.h"
-#include "weights/b14.h"
 
 //hls-fpga-machine-learning insert layer-config
 // conv
@@ -80,20 +72,6 @@ struct config3 : nnet::conv2d_config {
 };
 const ap_uint<config3::filt_height * config3::filt_width> config3::pixels[] = {0};
 
-// conv_alpha
-struct config12 : nnet::batchnorm_config {
-    static const unsigned n_in = OUT_HEIGHT_3*OUT_WIDTH_3*N_FILT_3;
-    static const unsigned n_filt = 3;
-    static const unsigned n_scale_bias = (n_filt == -1) ? n_in : n_filt;
-    static const unsigned io_type = nnet::io_parallel;
-    static const unsigned reuse_factor = 4;
-    static const bool store_weights_in_bram = false;
-    typedef conv_alpha_bias_t bias_t;
-    typedef conv_alpha_scale_t scale_t;
-    template<class x_T, class y_T>
-    using product = nnet::product::mult<x_T, y_T>;
-};
-
 // relu1
 struct relu_config5 : nnet::activ_config {
     static const unsigned n_in = 144;
@@ -121,20 +99,6 @@ struct config7 : nnet::dense_config {
     using product = nnet::product::mult<x_T, y_T>;
 };
 
-// dense1_alpha
-struct config13 : nnet::batchnorm_config {
-    static const unsigned n_in = N_LAYER_7;
-    static const unsigned n_filt = -1;
-    static const unsigned n_scale_bias = (n_filt == -1) ? n_in : n_filt;
-    static const unsigned io_type = nnet::io_parallel;
-    static const unsigned reuse_factor = 4;
-    static const bool store_weights_in_bram = false;
-    typedef dense1_alpha_bias_t bias_t;
-    typedef dense1_alpha_scale_t scale_t;
-    template<class x_T, class y_T>
-    using product = nnet::product::mult<x_T, y_T>;
-};
-
 // relu2
 struct relu_config9 : nnet::activ_config {
     static const unsigned n_in = 20;
@@ -158,20 +122,6 @@ struct config10 : nnet::dense_config {
     typedef bias10_t bias_t;
     typedef weight10_t weight_t;
     typedef layer10_index index_t;
-    template<class x_T, class y_T>
-    using product = nnet::product::mult<x_T, y_T>;
-};
-
-// output_alpha
-struct config14 : nnet::batchnorm_config {
-    static const unsigned n_in = N_LAYER_10;
-    static const unsigned n_filt = -1;
-    static const unsigned n_scale_bias = (n_filt == -1) ? n_in : n_filt;
-    static const unsigned io_type = nnet::io_parallel;
-    static const unsigned reuse_factor = 4;
-    static const bool store_weights_in_bram = false;
-    typedef output_alpha_bias_t bias_t;
-    typedef output_alpha_scale_t scale_t;
     template<class x_T, class y_T>
     using product = nnet::product::mult<x_T, y_T>;
 };
