@@ -6,7 +6,7 @@
 #ifndef B3_H_
 #define B3_H_
 
-#ifdef LOAD_WEIGHTS_FROM_TXT
+#ifdef LOAD_WEIGHTS_FROM_TEXT
 bias3_t b3[3];
 #else
 bias3_t b3[3] = {0, 0, 0};

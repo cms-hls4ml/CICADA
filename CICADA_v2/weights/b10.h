@@ -6,7 +6,7 @@
 #ifndef B10_H_
 #define B10_H_
 
-#ifdef LOAD_WEIGHTS_FROM_TXT
+#ifdef LOAD_WEIGHTS_FROM_TEXT
 bias10_t b10[1];
 #else
 bias10_t b10[1] = {0};

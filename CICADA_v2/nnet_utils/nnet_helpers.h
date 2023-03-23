@@ -32,7 +32,7 @@
 
 namespace nnet {
 
-#ifndef __SYNTHESIS__
+#ifdef LOAD_WEIGHTS_FROM_TEXT
 
 #ifndef WEIGHTS_DIR
 #define WEIGHTS_DIR "weights"

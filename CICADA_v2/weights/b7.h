@@ -6,7 +6,7 @@
 #ifndef B7_H_
 #define B7_H_
 
-#ifdef LOAD_WEIGHTS_FROM_TXT
+#ifdef LOAD_WEIGHTS_FROM_TEXT
 bias7_t b7[20];
 #else
 bias7_t b7[20] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
