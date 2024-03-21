@@ -3,6 +3,8 @@
 #include <any>
 #include "ap_fixed.h"
 
+using namespace CICADA_v1p1;
+
 class caloADModel_v1p1 : public hls4mlEmulator::Model{
     private:
         input_t _input[N_INPUT_1_1];

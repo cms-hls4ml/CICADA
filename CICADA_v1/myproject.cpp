@@ -21,6 +21,8 @@
 #include "myproject.h"
 #include "parameters.h"
 
+using namespace CICADA_v1;
+
 void myproject(
     input_t Inputs[N_INPUT_1_1],
     result_t layer6_out[N_LAYER_6]

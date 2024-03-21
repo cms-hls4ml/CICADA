@@ -19,9 +19,10 @@
 #include "weights/w5.h"
 #include "weights/b5.h"
 
-// hls-fpga-machine-learning insert layer-config
-// dense1
-struct config2 : nnet::dense_config {
+namespace CICADA_v1p1p2{
+  // hls-fpga-machine-learning insert layer-config
+  // dense1
+  struct config2 : nnet::dense_config {
     static const unsigned n_in = 252;
     static const unsigned n_out = 16;
     static const unsigned io_type = nnet::io_parallel;
@@ -36,20 +37,20 @@ struct config2 : nnet::dense_config {
     typedef weight2_t weight_t;
     typedef layer2_index index_t;
     template<class x_T, class y_T>
-    using product = nnet::product::mult<x_T, y_T>;
-};
+      using product = nnet::product::mult<x_T, y_T>;
+  };
 
-// relu1
-struct relu_config4 : nnet::activ_config {
+  // relu1
+  struct relu_config4 : nnet::activ_config {
     static const unsigned n_in = 16;
     static const unsigned table_size = 1024;
     static const unsigned io_type = nnet::io_parallel;
     static const unsigned reuse_factor = 2;
     typedef relu1_table_t table_t;
-};
+  };
 
-// dense2
-struct config5 : nnet::dense_config {
+  // dense2
+  struct config5 : nnet::dense_config {
     static const unsigned n_in = 16;
     static const unsigned n_out = 1;
     static const unsigned io_type = nnet::io_parallel;
@@ -64,17 +65,17 @@ struct config5 : nnet::dense_config {
     typedef weight5_t weight_t;
     typedef layer5_index index_t;
     template<class x_T, class y_T>
-    using product = nnet::product::mult<x_T, y_T>;
-};
+      using product = nnet::product::mult<x_T, y_T>;
+  };
 
-// outputs
-struct relu_config7 : nnet::activ_config {
+  // outputs
+  struct relu_config7 : nnet::activ_config {
     static const unsigned n_in = 1;
     static const unsigned table_size = 1024;
     static const unsigned io_type = nnet::io_parallel;
     static const unsigned reuse_factor = 2;
     typedef outputs_table_t table_t;
-};
-
+  };
+}
 
 #endif

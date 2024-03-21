@@ -23,9 +23,10 @@
 #include "weights/w10.h"
 #include "weights/b10.h"
 
-// hls-fpga-machine-learning insert layer-config
-// conv
-struct config3_mult : nnet::dense_config {
+namespace CICADA_v2p1p2{
+  // hls-fpga-machine-learning insert layer-config
+  // conv
+  struct config3_mult : nnet::dense_config {
     static const unsigned n_in = 4;
     static const unsigned n_out = 4;
     static const unsigned reuse_factor = 1;
@@ -36,10 +37,10 @@ struct config3_mult : nnet::dense_config {
     typedef bias3_t bias_t;
     typedef weight3_t weight_t;
     template<class x_T, class y_T>
-    using product = nnet::product::mult<x_T, y_T>;
-};
+      using product = nnet::product::mult<x_T, y_T>;
+  };
 
-struct config3 : nnet::conv2d_config {
+  struct config3 : nnet::conv2d_config {
     static const unsigned pad_top = 0;
     static const unsigned pad_bottom = 0;
     static const unsigned pad_left = 0;
@@ -58,7 +59,7 @@ struct config3 : nnet::conv2d_config {
     static const unsigned reuse_factor = 1;
     static const unsigned n_zeros = 0;
     static const unsigned multiplier_limit =
-        DIV_ROUNDUP(kernel_size * n_chan * n_filt, reuse_factor) - n_zeros / reuse_factor;
+      DIV_ROUNDUP(kernel_size * n_chan * n_filt, reuse_factor) - n_zeros / reuse_factor;
     static const bool store_weights_in_bram = false;
     static const unsigned strategy = nnet::resource;
     static const nnet::conv_implementation implementation = nnet::conv_implementation::linebuffer;
@@ -68,29 +69,29 @@ struct config3 : nnet::conv2d_config {
     static const unsigned n_partitions = 3;
     static const unsigned n_pixels = out_height * out_width / n_partitions;
     template<class data_T, class CONFIG_T>
-    using fill_buffer = nnet::fill_buffer_3<data_T, CONFIG_T>;
+      using fill_buffer = nnet::fill_buffer_3<data_T, CONFIG_T>;
     typedef conv_accum_t accum_t;
     typedef bias3_t bias_t;
     typedef weight3_t weight_t;
     typedef config3_mult mult_config;
     template<unsigned K, unsigned S, unsigned W>
-    using scale_index_height = nnet::scale_index_unscaled<K, S, W>;
+      using scale_index_height = nnet::scale_index_unscaled<K, S, W>;
     template<unsigned K, unsigned S, unsigned W>
-    using scale_index_width = nnet::scale_index_unscaled<K, S, W>;
-};
-const ap_uint<config3::filt_height * config3::filt_width> config3::pixels[] = {0};
+      using scale_index_width = nnet::scale_index_unscaled<K, S, W>;
+  };
+  const ap_uint<config3::filt_height * config3::filt_width> config3::pixels[] = {0};
 
-// relu0
-struct relu_config5 : nnet::activ_config {
+  // relu0
+  struct relu_config5 : nnet::activ_config {
     static const unsigned n_in = 252;
     static const unsigned table_size = 1024;
     static const unsigned io_type = nnet::io_parallel;
     static const unsigned reuse_factor = 2;
     typedef relu0_table_t table_t;
-};
+  };
 
-// dense1
-struct config7 : nnet::dense_config {
+  // dense1
+  struct config7 : nnet::dense_config {
     static const unsigned n_in = 252;
     static const unsigned n_out = 16;
     static const unsigned io_type = nnet::io_parallel;
@@ -105,20 +106,20 @@ struct config7 : nnet::dense_config {
     typedef weight7_t weight_t;
     typedef layer7_index index_t;
     template<class x_T, class y_T>
-    using product = nnet::product::mult<x_T, y_T>;
-};
+      using product = nnet::product::mult<x_T, y_T>;
+  };
 
-// relu1
-struct relu_config9 : nnet::activ_config {
+  // relu1
+  struct relu_config9 : nnet::activ_config {
     static const unsigned n_in = 16;
     static const unsigned table_size = 1024;
     static const unsigned io_type = nnet::io_parallel;
     static const unsigned reuse_factor = 2;
     typedef relu1_table_t table_t;
-};
+  };
 
-// dense2
-struct config10 : nnet::dense_config {
+  // dense2
+  struct config10 : nnet::dense_config {
     static const unsigned n_in = 16;
     static const unsigned n_out = 1;
     static const unsigned io_type = nnet::io_parallel;
@@ -133,17 +134,17 @@ struct config10 : nnet::dense_config {
     typedef weight10_t weight_t;
     typedef layer10_index index_t;
     template<class x_T, class y_T>
-    using product = nnet::product::mult<x_T, y_T>;
-};
+      using product = nnet::product::mult<x_T, y_T>;
+  };
 
-// outputs
-struct relu_config12 : nnet::activ_config {
+  // outputs
+  struct relu_config12 : nnet::activ_config {
     static const unsigned n_in = 1;
     static const unsigned table_size = 1024;
     static const unsigned io_type = nnet::io_parallel;
     static const unsigned reuse_factor = 2;
     typedef outputs_table_t table_t;
-};
-
+  };
+}
 
 #endif

@@ -26,6 +26,7 @@
 
 #include "defines.h"
 
+using namespace CICADA_v1;
 // Prototype of top level function for C-synthesis
 void myproject(
     input_t Inputs[N_INPUT_1_1],

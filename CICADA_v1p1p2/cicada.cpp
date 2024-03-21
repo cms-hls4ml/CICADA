@@ -3,6 +3,8 @@
 #include "cicada.h"
 #include "parameters.h"
 
+using namespace CICADA_v1p1p2;
+
 void cicada_v1p1p2(
     input_t inputs_[N_INPUT_1_1],
     result_t layer7_out[N_LAYER_5]
