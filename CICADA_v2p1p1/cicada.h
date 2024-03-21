@@ -7,6 +7,8 @@
 
 #include "defines.h"
 
+using namespace CICADA_v2p1p1;
+
 // Prototype of top level function for C-synthesis
 void cicada_v2p1p1(
     input_t inputs_[N_INPUT_1_1],

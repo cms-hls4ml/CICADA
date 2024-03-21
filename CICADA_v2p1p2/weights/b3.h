@@ -6,10 +6,12 @@
 #ifndef B3_H_
 #define B3_H_
 
+namespace CICADA_v2p1p2{
 #ifdef LOAD_WEIGHTS_FROM_TEXT
-bias3_t b3[4];
+  bias3_t b3[4];
 #else
-bias3_t b3[4] = {0, 0, 0, 0};
+  bias3_t b3[4] = {0, 0, 0, 0};
 #endif
+}
 
 #endif

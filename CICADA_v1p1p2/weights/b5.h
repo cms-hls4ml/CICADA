@@ -6,10 +6,12 @@
 #ifndef B5_H_
 #define B5_H_
 
+namespace CICADA_v1p1p2{
 #ifdef LOAD_WEIGHTS_FROM_TEXT
-bias5_t b5[1];
+  bias5_t b5[1];
 #else
-bias5_t b5[1] = {0};
+  bias5_t b5[1] = {0};
 #endif
+}
 
 #endif

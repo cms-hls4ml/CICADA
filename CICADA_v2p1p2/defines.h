@@ -24,27 +24,29 @@
 #define N_LAYER_10 1
 #define N_LAYER_10 1
 
-// hls-fpga-machine-learning insert layer-precision
-typedef ap_uint<10> input_t;
-typedef ap_fixed<30,22> conv_accum_t;
-typedef ap_fixed<30,22> layer3_t;
-typedef ap_fixed<12,4> weight3_t;
-typedef ap_uint<1> bias3_t;
-typedef ap_ufixed<10,6,AP_RND_CONV,AP_SAT> layer5_t;
-typedef ap_fixed<18,8> relu0_table_t;
-typedef ap_fixed<26,14> dense1_accum_t;
-typedef ap_fixed<26,14> layer7_t;
-typedef ap_fixed<8,2> weight7_t;
-typedef ap_fixed<8,4> bias7_t;
-typedef ap_uint<1> layer7_index;
-typedef ap_ufixed<10,6,AP_RND_CONV,AP_SAT> layer9_t;
-typedef ap_fixed<18,8> relu1_table_t;
-typedef ap_fixed<26,14> dense2_accum_t;
-typedef ap_fixed<26,14> layer10_t;
-typedef ap_fixed<12,4> weight10_t;
-typedef ap_uint<1> bias10_t;
-typedef ap_uint<1> layer10_index;
-typedef ap_ufixed<16,8,AP_RND_CONV,AP_SAT> result_t;
-typedef ap_fixed<18,8> outputs_table_t;
+namespace CICADA_v2p1p2{
+  // hls-fpga-machine-learning insert layer-precision
+  typedef ap_uint<10> input_t;
+  typedef ap_fixed<30,22> conv_accum_t;
+  typedef ap_fixed<30,22> layer3_t;
+  typedef ap_fixed<12,4> weight3_t;
+  typedef ap_uint<1> bias3_t;
+  typedef ap_ufixed<10,6,AP_RND_CONV,AP_SAT> layer5_t;
+  typedef ap_fixed<18,8> relu0_table_t;
+  typedef ap_fixed<26,14> dense1_accum_t;
+  typedef ap_fixed<26,14> layer7_t;
+  typedef ap_fixed<8,2> weight7_t;
+  typedef ap_fixed<8,4> bias7_t;
+  typedef ap_uint<1> layer7_index;
+  typedef ap_ufixed<10,6,AP_RND_CONV,AP_SAT> layer9_t;
+  typedef ap_fixed<18,8> relu1_table_t;
+  typedef ap_fixed<26,14> dense2_accum_t;
+  typedef ap_fixed<26,14> layer10_t;
+  typedef ap_fixed<12,4> weight10_t;
+  typedef ap_uint<1> bias10_t;
+  typedef ap_uint<1> layer10_index;
+  typedef ap_ufixed<16,8,AP_RND_CONV,AP_SAT> result_t;
+  typedef ap_fixed<18,8> outputs_table_t;
+}
 
 #endif

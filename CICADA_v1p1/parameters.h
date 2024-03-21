@@ -22,9 +22,10 @@
 #include "weights/w6.h"
 #include "weights/b6.h"
 
-//hls-fpga-machine-learning insert layer-config
-// dense1
-struct config2 : nnet::dense_config {
+namespace CICADA_v1p1{
+  //hls-fpga-machine-learning insert layer-config
+  // dense1
+  struct config2 : nnet::dense_config {
     static const unsigned n_in = 252;
     static const unsigned n_out = 15;
     static const unsigned io_type = nnet::io_parallel;
@@ -38,11 +39,11 @@ struct config2 : nnet::dense_config {
     typedef weight2_t weight_t;
     typedef layer2_index index_t;
     template<class x_T, class y_T>
-    using product = nnet::product::mult<x_T, y_T>;
-};
+      using product = nnet::product::mult<x_T, y_T>;
+  };
 
-// QBN1
-struct config4 : nnet::batchnorm_config {
+  // QBN1
+  struct config4 : nnet::batchnorm_config {
     static const unsigned n_in = N_LAYER_2;
     static const unsigned n_filt = -1;
     static const unsigned n_scale_bias = (n_filt == -1) ? n_in : n_filt;
@@ -52,20 +53,20 @@ struct config4 : nnet::batchnorm_config {
     typedef qbn1_bias_t bias_t;
     typedef qbn1_scale_t scale_t;
     template<class x_T, class y_T>
-    using product = nnet::product::mult<x_T, y_T>;
-};
+      using product = nnet::product::mult<x_T, y_T>;
+  };
 
-// relu1
-struct relu_config5 : nnet::activ_config {
+  // relu1
+  struct relu_config5 : nnet::activ_config {
     static const unsigned n_in = 15;
     static const unsigned table_size = 1024;
     static const unsigned io_type = nnet::io_parallel;
     static const unsigned reuse_factor = 3;
     typedef relu1_table_t table_t;
-};
+  };
 
-// output
-struct config6 : nnet::dense_config {
+  // output
+  struct config6 : nnet::dense_config {
     static const unsigned n_in = 15;
     static const unsigned n_out = 1;
     static const unsigned io_type = nnet::io_parallel;
@@ -79,8 +80,8 @@ struct config6 : nnet::dense_config {
     typedef weight6_t weight_t;
     typedef layer6_index index_t;
     template<class x_T, class y_T>
-    using product = nnet::product::mult<x_T, y_T>;
-};
-
+      using product = nnet::product::mult<x_T, y_T>;
+  };
+}
 
 #endif
