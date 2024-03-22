@@ -26,12 +26,12 @@
 
 #include "defines.h"
 
-using namespace CICADA_v1p1;
+namespace CICADA_v1p1{
 
-// Prototype of top level function for C-synthesis
-void myproject(
-    input_t Inputs[N_INPUT_1_1],
-    result_t layer6_out[N_LAYER_6]
-);
-
+  // Prototype of top level function for C-synthesis
+  void myproject(
+		 input_t Inputs[N_INPUT_1_1],
+		 result_t layer6_out[N_LAYER_6]
+		 );
+}
 #endif
