@@ -7,12 +7,12 @@
 
 #include "defines.h"
 
-using namespace CICADA_v1p1p2;
+namespace CICADA_v1p1p2{
 
-// Prototype of top level function for C-synthesis
-void cicada_v1p1p2(
-    input_t inputs_[N_INPUT_1_1],
-    result_t layer7_out[N_LAYER_5]
-);
-
+  // Prototype of top level function for C-synthesis
+  void cicada_v1p1p2(
+		     input_t inputs_[N_INPUT_1_1],
+		     result_t layer7_out[N_LAYER_5]
+		     );
+}
 #endif
